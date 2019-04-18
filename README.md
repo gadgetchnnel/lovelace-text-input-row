@@ -20,8 +20,8 @@ Download the lovelace-text-input-row.js and put it somewhere under *config folde
 
 ## Configuration example
 
-- type: entities
-  entities:
-    - entity: input_text.my_text
-      type: 'custom:text-input-row'
+    - type: entities
+      entities:
+        - entity: input_text.my_text
+          type: 'custom:text-input-row'
 
