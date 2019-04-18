@@ -22,8 +22,12 @@ Download the lovelace-text-input-row.js and put it somewhere under *config folde
 
     - type: entities
       entities:
-        - entity: input_text.my_text
+        - entity: input_text.announcement_text
           type: 'custom:text-input-row'
-
+        - type: call-service
+          name: ' '
+          icon: 'mdi:voice'
+          action_name: Announce It...
+          service: script.send_annoucement
 
 ![TextInputRow](https://user-images.githubusercontent.com/2099542/56373939-f9f75e00-61f9-11e9-891e-de790aa5ec62.png)
