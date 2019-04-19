@@ -35,6 +35,16 @@ class TextInputRow extends Polymer.Element {
     this._hass.callService('input_text', 'set_value', param);
   }
 
+  computeObjectId(entityId) {
+    return entityId.substr(entityId.indexOf(".") + 1);
+  }
+
+  computeStateName(stateObj){
+    return stateObj.attributes.friendly_name === undefined 
+    ? this.computeObjectId(stateObj.entity_id).replace(/_/g, " ") 
+    : stateObj.attributes.friendly_name || "";
+  }
+
   set hass(hass) {
     this._hass = hass;
     this.stateObj = hass.states[this._config.entity];
@@ -44,11 +54,9 @@ class TextInputRow extends Polymer.Element {
       this.maxlength = this.stateObj.attributes.max;
       this.pattern = this.stateObj.attributes.pattern;
       this.mode = this.minlength = this.stateObj.attributes.mode;
-      this.label = this.stateObj.attributes.friendly_name;
+      this.label = this._config.name ? this._config.name : this.computeStateName(this.stateObj);
     }
   }
-
-  
 }
 
 customElements.define('text-input-row', TextInputRow);
