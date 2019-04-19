@@ -15,7 +15,7 @@ This will only work for input_text entities.
 Download the lovelace-text-input-row.js and put it somewhere under *config folder*/www
 
     resources:
-      - url: local/path/to/file/lovelace-text-input-row.js?v=0.0.7
+      - url: local/path/to/file/lovelace-text-input-row.js?v=0.0.8
         type: js
 
 ## Configuration example
