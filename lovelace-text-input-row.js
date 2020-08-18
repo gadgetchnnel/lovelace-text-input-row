@@ -17,6 +17,25 @@ class TextInputRow extends Polymer.Element {
     `;
   }
 
+
+  _handleTouchStart(ev){
+    // Blur and dispatch change event.
+    this.$.textinput.blur();
+    var event = new Event('change');
+    this.$.textinput.dispatchEvent(event);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.boundTouchStartHandler = this._handleTouchStart.bind(this);
+    window.addEventListener('touchstart', this.boundTouchStartHandler, { passive: true, useCapture: true});
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('touchstart', this.boundTouchStartHandler);
+    super.disconnectedCallback();
+  }
+
   ready() {
     super.ready();
     this.$.textinput.addEventListener('click', ev => ev.stopPropagation());
@@ -32,7 +51,9 @@ class TextInputRow extends Polymer.Element {
       entity_id: this._config.entity,
       value: newValue,
     };
-    this._hass.callService('input_text', 'set_value', param);
+    if (this.value != newValue) {
+      this._hass.callService('input_text', 'set_value', param);
+    }
   }
 
   computeObjectId(entityId) {
