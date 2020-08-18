@@ -18,17 +18,20 @@ class TextInputRow extends Polymer.Element {
   }
 
 
-  _handleTouchStart(ev){
-    // Blur and dispatch change event.
-    this.$.textinput.blur();
+  _handleEventTrigger(ev){
+    // Dispatch change event.
     var event = new Event('change');
+    this.$.textinput.blur();
     this.$.textinput.dispatchEvent(event);
+
+
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.boundTouchStartHandler = this._handleTouchStart.bind(this);
+    this.boundTouchStartHandler = this._handleEventTrigger.bind(this);
     window.addEventListener('touchstart', this.boundTouchStartHandler, { passive: true, useCapture: true});
+    window.addEventListener('mousedown', this.boundTouchStartHandler, { passive: true, useCapture: true});
   }
 
   disconnectedCallback() {
