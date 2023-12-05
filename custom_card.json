@@ -1,6 +1,6 @@
 {
     "lovelace-text-input-row": {
-      "version": "0.0.8",
+      "version": "0.0.9",
       "remote_location": "https://raw.githubusercontent.com/gadgetchnnel/lovelace-text-input-row/master/lovelace-text-input-row.js",
       "visit_repo": "https://github.com/gadgetchnnel/lovelace-text-input-row/",
       "changelog": "https://github.com/gadgetchnnel/lovelace-text-input-row/"
