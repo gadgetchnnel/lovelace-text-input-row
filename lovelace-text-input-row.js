@@ -47,6 +47,28 @@ class TextInputRow extends LitElement {
     `;
   }
 
+
+  _handleEventTrigger(ev){
+    // Dispatch change event.
+    var event = new Event('change');
+    this.$.textinput.blur();
+    this.$.textinput.dispatchEvent(event);
+
+
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.boundTouchStartHandler = this._handleEventTrigger.bind(this);
+    window.addEventListener('touchstart', this.boundTouchStartHandler, { passive: true, useCapture: true});
+    window.addEventListener('mousedown', this.boundTouchStartHandler, { passive: true, useCapture: true});
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('touchstart', this.boundTouchStartHandler);
+    super.disconnectedCallback();
+  }
+
   ready() {
     super.ready();
     this.$.textinput.addEventListener('click', ev => ev.stopPropagation());
@@ -62,7 +84,9 @@ class TextInputRow extends LitElement {
       entity_id: this._config.entity,
       value: newValue,
     };
-    this._hass.callService('input_text', 'set_value', param);
+    if (this.value != newValue) {
+      this._hass.callService('input_text', 'set_value', param);
+    }
   }
 
   computeObjectId(entityId) {
