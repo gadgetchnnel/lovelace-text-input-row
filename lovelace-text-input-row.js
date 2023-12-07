@@ -1,4 +1,4 @@
-const LitElement = customElements.get('home-assistant-main') ? Object.getPrototypeOf(customElements.get('home-assistant-main')) : Object.getPrototypeOf(customElements.get('hui-view'));
+const LitElement = Object.getPrototypeOf(customElements.get("ha-panel-lovelace"));
 const html = LitElement.prototype.html;
 const css = LitElement.prototype.css;
 
